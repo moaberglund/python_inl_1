@@ -73,8 +73,7 @@ def plottaKPI(kpiData):
             values[i] = float(values[i])
 
         # Skapar en lista med månadsetiketter (används för att sätta rätt etikett i diagrammet)
-        month_labels = []
-        month_labels.extend(data_list[0][1:])
+        month_labels = data_list[0][1:]
 
         plt.plot(years, values, label=month_labels[month_index - 1])
 
@@ -84,6 +83,7 @@ def plottaKPI(kpiData):
     plt.title("Konsumentprisindex År 1980-2023")
     plt.legend()
     plt.grid()
+
     # Anpassa x-axeln för att visa endast vart tionde år
     xticks = [years[0], years[10], years[20], years[30], years[40]]
     plt.xticks(xticks)
@@ -118,7 +118,7 @@ Välj vilka varu-/tjänstegrupper du vill analysera (ex. 1, 3, 4):
     print("Ange mellan vilka år du vill göra analysen (ex. 2000, 2010)")
 
     # spara valda år i en lista som konverteras till int med hjälp av
-    # convert funktionen
+    # converter funktionen
     year_input = converter(input("> "))
     # ta ut index i 2d listan för inputen av start året
     start_year = year_input[0] - 1980
@@ -126,8 +126,7 @@ Välj vilka varu-/tjänstegrupper du vill analysera (ex. 1, 3, 4):
     end_year = year_input[1] - 1980
 
     # Plocka ut åren för utskrift till x-axeln
-    years = []
-    years.extend(data_list[0][1:])
+    years = data_list[0][1:]
 
     # Loopa genom varje vald grupp
     for index in groups_input:
@@ -139,6 +138,8 @@ Välj vilka varu-/tjänstegrupper du vill analysera (ex. 1, 3, 4):
 
         # Konvertera värdena till float
         selected_values = list(map(float, selected_values))
+        # konvertera åren till int
+        selected_years = list(map(int, selected_years))
 
         # Skapar en lista med gruppetiketter (används för att sätta rätt etikett i diagrammet)
         group_labels = data_list[index][0]
@@ -192,14 +193,14 @@ Ange en kategori (1-7) som du vill analysera (ex. 1):
     # 1980 har inget föregående år, starta på index 1
     # Loopa från andra året (index 1) till det sista året
     for i in range(1, len(group_data)):
-        # Hämta KPI för "aktuellt" år och gör om till float
-        KPI_current = float(group_data[i])
-        # Hämta KPI för dess föregående år([i-1]) och gör om till float
-        KPI_previous = float(group_data[i-1])
+        # Hämta data för "aktuellt" år och gör om till float
+        data_current = float(group_data[i])
+        # Hämta data för dess föregående år([i-1]) och gör om till float
+        data_previous = float(group_data[i-1])
         # Beräkna förändringsfaktorn som procentuell förändring(* 100) från föregående år
-        FF = ((KPI_current - KPI_previous) / KPI_previous) * 100
+        ff = ((data_current - data_previous) / data_previous) * 100
         # Lägg till förändringsfaktorn i listan
-        ff_values.append(FF)
+        ff_values.append(ff)
 
     # Skapa ett stapeldiagram
     plt.bar(years[1:], ff_values)
@@ -222,12 +223,12 @@ def statistik(livsData):
     # Funktionen från upp.1 används för att läsa in listan
     data_list = read_file(livsData)
 
-    # Plocka bort rubrikraden från 2d listan
+    # Plocka ut rubrikraden från 2d listan
     groups = data_list[1:]
 
     # Skriv ut rubrikerna innan man börjar loopa
-    print(f'{"Varu-/tjänstegrupp":<40} {"Max":<10} {"Median":<10} {"Medelvärde":<10}')
-    print("-"*80)
+    print(f'{"Varu-/tjänstegrupp":<50} {"Max":<15} {"Median":<15} {"Medelvärde":<15}')
+    print("-"*100)
 
     # Listor för diagrammet
     max_values = []
@@ -251,9 +252,9 @@ def statistik(livsData):
 
         # Medianberäkning
         nr = len(values)
-
-        if nr % 2 == 0:  # Om antalet i listan är jämnt hämtas de två mittersta talen
-            # // används för absolut delning, avrundar neråt
+        # Om antalet i listan är jämnt hämtas de två mittersta talen
+        if nr % 2 == 0:
+            # // används för absolut delning
             median = (values[nr // 2 - 1] + values[nr // 2]) / 2
         else:    # Om udda hämtas det mittersta elementet
             median = values[nr // 2]
@@ -264,10 +265,10 @@ def statistik(livsData):
         median_values.append(median)
         group_names.append(name)
 
-        # utskrift :<placering och .antal decimaler
-        print(f'''{name:<40} {max:<10.2f} {
-              median:<10.2f} {average:<10.2f}''')
-        print("-"*80)
+        # utskrift :<placering och .antal decimaler f
+        print(f'''{name:<50} {max:<15} {
+              median:<15.2f} {average:<15.2f}''')
+        print("-"*100)
 
     # Skapa stapeldiagram
     plt.bar(group_names, max_values, width=0.6, color="blue", label="Maxvärde")
@@ -275,6 +276,7 @@ def statistik(livsData):
             color="red", label="Medianvärde")
     plt.bar(group_names, average_values, width=0.2,
             color="green", label="Medelvärde")
+
     # Rotera namnen på x-axeln 10 grader för bättre läsbarhet
     plt.xticks(rotation=(-10))
     plt.ylabel("Maxvärde, medianvärde och medelvärde")
@@ -290,7 +292,7 @@ def statistik(livsData):
 # Skriv din kod här:
 
 
-def main_menu():
+def menu():
     while True:
         print('''
 Meny
@@ -334,4 +336,4 @@ Välj menyalternativ (1-6):
             print("Ogiltigt val, försök igen.")
 
 
-main_menu()
+menu()
