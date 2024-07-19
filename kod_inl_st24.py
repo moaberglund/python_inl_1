@@ -39,11 +39,6 @@ def read_file(filnamn):
         return data_list    # för att avsluta funktionen, returnera listan med inlaggd data
 
 
-# kalla på funktionerna med respektive fil och skriv ut
-# print(read_file("kpi2023.csv"))
-# print(read_file("varutjanstegrupp.csv"))
-
-
 # Deluppgift 2: Funktioner från deluppgift 2 i ordning.
 # Skriv din kod här:
 
@@ -95,9 +90,6 @@ def plottaKPI(kpiData):
 
     # Redo för att visa diagramet
     plt.show()
-
-
-# plottaKPI("kpi2023.csv")
 
 
 # Deluppgift 3: Funktioner från deluppgift 3 i ordning.
@@ -164,9 +156,6 @@ Välj vilka varu-/tjänstegrupper du vill analysera (ex. 1, 3, 4):
     plt.show()
 
 
-# varortjanster("Varutjanstegrupp.csv")
-
-
 # Deluppgift 4: Funktioner från deluppgift 4 i ordning.
 # Skriv din kod här:
 
@@ -224,8 +213,6 @@ Ange en kategori (1-7) som du vill analysera (ex. 1):
     plt.grid()
     plt.show()
 
-
-# ff("Varutjanstegrupp.csv")
 
 # Deluppgift 5: Funktioner från deluppgift 5 i ordning.
 # Skriv din kod här:
@@ -299,9 +286,6 @@ def statistik(livsData):
     plt.show()
 
 
-statistik("Varutjanstegrupp.csv")
-
-
 # Huvudprogram med Meny från deluppgift 0. Använd menyrubriker enl. uppgiftsbeskrivningen.
 # Skriv din kod här:
 
@@ -309,24 +293,42 @@ statistik("Varutjanstegrupp.csv")
 def main_menu():
     while True:
         print('''
-        Meny:
-        1. Plotta KPI
-        2. Analysera varor och tjänster
-        3. Beräkna förändringsfaktor
-        4. Beräkna statistik
-        0. Avsluta
+Meny
+        
+1. Hämta data från fil - uppgift 1
+2. Analysera data - uppgift 2
+3. Analysera data - uppgift 3
+4. Analysera data - uppgift 4
+5. Analysera data - uppgift 5
+6. Avsluta
+              
+Välj menyalternativ (1-6):
+              
         ''')
+
         choice = input("> ")
 
         if choice == '1':
-            plottaKPI("kpi2023.csv")
+            kpiData = read_file("kpi2023.csv")
+            livsData = read_file("varutjanstegrupp.csv")
+
+            print(kpiData[0:2])
+            print(livsData[0:2])
+
         elif choice == '2':
-            varortjanster("Varutjanstegrupp.csv")
+            plottaKPI("kpi2023.csv")
+
         elif choice == '3':
-            ff("Varutjanstegrupp.csv")
+            varortjanster("Varutjanstegrupp.csv")
+
         elif choice == '4':
+            ff("Varutjanstegrupp.csv")
+
+        elif choice == "5":
             statistik("Varutjanstegrupp.csv")
-        elif choice == '0':
+
+        elif choice == "6":
+            print("Programmet avslutas")
             break
         else:
             print("Ogiltigt val, försök igen.")
