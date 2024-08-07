@@ -31,7 +31,7 @@ def read_file(filnamn):
     # för att se till att kodningen blir utf-8
     with open(filnamn, "r", encoding="utf-8", newline="") as file:
         # för att läsa in filens innehåll skapas en läsare
-        csv_reader = csv.reader(file, delimiter=";", )
+        csv_reader = csv.reader(file, delimiter=";")
 
         for rad in csv_reader:  # loopa igenom datan i filen och lägg till den i listan
             data_list.append(rad)
