@@ -16,7 +16,6 @@ import matplotlib.pyplot as plt
 
 def converter(string):
     # Delar upp varje värde för listan vid ett komma + mellanslag
-    # tog bort överflödigt kommatecken enligt feedback
     li = list(string.split(", "))
     # ser till att om siffror är i str-format, omvandla till int-format
     # Användning av map() för att konvertera varje element i listan till heltal
@@ -258,7 +257,6 @@ def statistik(livsData):
         values.sort()   # sortera listan för att kunna göra uträkningarna
 
         # Ta ut hösta värdet med hjälp av find_max_value()
-        # feedback säger att jag ej får använda sort()
         max = find_max_value(values)
 
         # Medelvärde - summan delat på längden av listan
