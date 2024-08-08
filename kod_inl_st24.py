@@ -237,6 +237,15 @@ def statistik(livsData):
     median_values = []
     group_names = []
 
+    # Funktion för att hitta maxvärdet
+    def find_max_value(values):
+        max_value = values[0]  # Starta med det första värdet
+        # loopa igenom och byt ut när man hittar ett större värde
+        for value in values:
+            if value > max_value:
+                max_value = value
+        return max_value
+
     for group in groups:
         # Index 0 är namnet på kategorin, spara dess etikett
         name = group[0]
@@ -245,9 +254,9 @@ def statistik(livsData):
         values = list(map(float, group[1:]))
         values.sort()   # sortera listan för att kunna göra uträkningarna
 
-        # Ta ut hösta värdet med hjälp av max()
-        # eftersom sorted() bara får användas för medianen enligt feedback och diskussionsforum
-        max = max(values)
+        # Ta ut hösta värdet med hjälp av find_max_value()
+        # feedback säger att jag ej får använda sort()
+        max = find_max_value(values)
 
         # Medelvärde - summan delat på längden av listan
         average = sum(values) / len(values)
