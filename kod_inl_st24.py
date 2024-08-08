@@ -1,5 +1,8 @@
 # Skriv en inledande kommentar som talar om vad programmet gör.
 
+# Detta program analyserar KPI-data och olika varu- och tjänstegruppers prisutveckling över tid.
+# Programmet kan hämta data från CSV-filer, beräkna statistik och visualisera data med hjälp av diagram.
+
 
 # Placera dina modulimpoter här:
 import csv
