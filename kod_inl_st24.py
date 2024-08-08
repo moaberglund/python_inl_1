@@ -326,7 +326,7 @@ Välj menyalternativ (1-6):
 
         if choice == '1':
             kpiData = read_file("kpi2023.csv")
-            livsData = read_file("varutjanstegrupp.csv")
+            livsData = read_file("Varutjanstegrupp.csv")
 
             print(kpiData[0:2])
             print(livsData[0:2])
